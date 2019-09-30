@@ -1,0 +1,49 @@
+.label-spacing {
+  display: inline-block;
+  margin-top: 1.4rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+.normal-font {
+  font-size: 1rem;
+  font-family: Barlow;
+}
+
+.center_container {
+  text-align: center;
+  margin-top: 1.4rem;
+}
+
+.submit_btn {
+  display: inline-block;
+  width: 100%;
+  border-radius: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.cancel_btn {
+  display: inline-block;
+  width: 100%;
+  background: #f50057;
+  border-radius: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.invalid-feedback {
+  font-size: 14px;
+  color: #ff0000;
+}
+
+.is-invalid fieldset {
+  border-color: #ff0000;
+}
+
+.process_btn {
+  position: absolute;
+}

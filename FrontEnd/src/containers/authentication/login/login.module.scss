@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700&display=swap');
+
+.whiteBackground {
+  background: #fff;
+}
+
+.panel {
+  animation: portal-login 1s forwards 1;
+  animation-delay: 0.6s;
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px;
+}
+
+.logo {
+  display: inline-block;
+  max-width: 200px !important;
+  vertical-align: center !important;
+}
+.appBar {
+  background: #f7f7f7 !important;
+  height: 70px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.submit_btn {
+  font-family: 'Roboto', sans-serif !important;
+  width: 100%;
+  border-radius: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #fff !important;
+  text-transform: none;
+  font-size: 1.3rem;
+  font-weight: 500;
+  align-self: center;
+}
+
+.robot-thin {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 2.4rem;
+  color: #666;
+}
+
+.robot-bold {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: left !important;
+}
+
+.sign-up:hover {
+  color: rgb(0, 77, 150);
+  text-decoration: none;
+}
+
+.feild-border {
+  border-radius: 0 !important;
+}
+
+.feild-border:focus {
+  outline-width: thin !important;
+}
+.process_btn {
+  position: absolute;
+}
+
+.is-invalid fieldset {
+  border-color: #ff0000;
+}
+
+.is-invalid span span {
+  color: #ff0000;
+}
+
+.invalid-feedback {
+  font-size: 14px;
+  color: #ff0000;
+}
+
+.login-actions {
+  justify-content: space-between;
+}
+
+.signup-content {
+  text-align: center;
+}
+
+.signup-logo {
+  height: 64px;
+}
+
+@keyframes portal-login {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}

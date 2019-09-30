@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <!--[if !mso]><!-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!--<![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Please verify your email</title>
+</head>
+
+<body>
+  <div style="width:100%!important;background:#f2f2f2;margin:0;padding:0" bgcolor="#f2f2f2">
+    <div class="block">
+      <table style="width:100%!important;line-height:100%!important;border-collapse:collapse;margin:0;padding:0" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#f2f2f2">
+        <tbody>
+          <tr>
+            <td class="header" style="padding: 40px 0px;" align="center">
+              <a href="<%= site_link %>">
+                <img src="../images/logo.png" alt="Kagoal" style="max-width: 150px">
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="block">
+      <table style="border-collapse:collapse" width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center">
+        <tbody>
+          <tr>
+            <td>
+              <table width="540" align="center" cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse">
+                <tbody>
+                  <tr>
+                    <td width="100%" height="30" style="border-collapse:collapse">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="vertical-align:top;font-family:Helvetica,arial,sans-serif;font-size:28px;color:#767676;text-align:left;line-height:42px;font-weight:400;border-collapse:collapse" valign="top">
+                      We're glad you're here, <%= team_name %>.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="vertical-align:top;font-family:Helvetica,arial,sans-serif;font-size:14px;color:#767676;text-align:left;line-height:21px;border-collapse:collapse;padding-bottom:20px;" valign="top">
+                      We just want to confirm it's you.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td valign="top" align="center" width="100%" border="0" style="border-width:0px">
+                      <div style="margin:0;outline:none;padding:0;text-align:center;background:#ffffff">
+                        <a href="<%= verify_link %>" style="margin:0;outline:none;padding:21px;color:#ffffff;background-color:#00a9ff;border:0 solid#ffffff;text-decoration:none;border-radius:32px;font-size:16px;display:inline-block;line-height:1.1;text-align:center;font-family:Helvetica,arial,sans-serif;">
+                          <span style="color:#ffffff;font-size:16px;font-weight:normal;padding:0 8px;font-family:Helvetica,arial,sans-serif">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Confirm Your Email Address&nbsp;&nbsp;&nbsp;&nbsp;
+                          </span>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="vertical-align:top;font-family:Helvetica,arial,sans-serif;font-size:14px;color:#767676;text-align:left;line-height:21px;border-collapse:collapse;padding-bottom:20px;padding-top:20px;" valign="top">
+                      If you did'nt create a <a href="<%= site_link %>" target="_blank"><%= site_link %></a> account, just delete this email.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="vertical-align:top;font-family:Helvetica,arial,sans-serif;font-size:14px;color:#767676;text-align:left;line-height:21px;border-collapse:collapse;padding-bottom:20px;" valign="top">
+                      Cheers,<br>
+                      The <a href="<%= site_link %>" target="_blank"><%= site_link %></a> team.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="block">
+      <table style="width:100%!important;line-height:100%!important;border-collapse:collapse;margin:0;padding:0" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#f2f2f2">
+        <tr>
+          <td style="padding:20px 10px 20px 10px" align="center">
+            <span style="font-family:Arial,Helvetica,Sans serif;font-size:10px;line-height:12px;color:#494949">Made with ♥ <a href="<%= site_link %>" target="_blank"><%= site_link %></a>.</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
