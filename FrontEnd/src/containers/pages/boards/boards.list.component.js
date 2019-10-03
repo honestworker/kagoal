@@ -10,18 +10,19 @@ import Grid from '@material-ui/core/Grid';
 
 import BoardAdd from './components/board.add.component';
 import BoardWidget from './components/board.widget.component';
-import BoardModal from './components/board.modal.component';
+import BoardNewModal from './components/board.new.modal.component';
 
 import themeStyles from './boards.theme.style';
 import scss from './boards.module.scss';
 
-import { createBoard, getBoardList } from '../../../actions/boards.action';
+import { createBoard, cloneBoard, getBoardList } from '../../../actions/boards.action';
 
 class BoardsList extends React.Component {
   state = {
-    baords: [],
-    open_modal: false,
+    boards: [],
+    new_modal: false,
     data: [],
+    refresh: false
   }
 
   componentDidMount = () => {
@@ -36,57 +37,83 @@ class BoardsList extends React.Component {
     }
     if (nextProps.res_data.api === 'createboard') {
       this.setState({
-        open_modal: false
+        new_modal: false
       });
+      if (this.state.refresh) {
+        this.setState({
+          refresh: false
+        });
+        this.props.getBoardList();
+      }
     }
     if (nextProps.res_data.api === 'boardlist') {
       this.setState({
-        baords: nextProps.res_data.data
+        boards: nextProps.res_data.data
       });
+    }
+    if (nextProps.res_data.api === 'cloneboard') {
+      if (this.state.refresh) {
+        this.setState({
+          refresh: false
+        });
+        this.props.getBoardList();
+      }
     }
   }
 
   render() {
-    const { data, baords, open_modal } = this.state;
+    const { data, boards, new_modal } = this.state;
     const { classes } = this.props;
     
-    const onAddBoard = (event) => {
+    const handleOpenNewBoardModal = (event) => {
       this.setState({
-        open_modal: true
+        new_modal: true,
+        refresh: true
       })
     };
 
-    const onCloseModal = (event) => {
+    const handleCloseModal = (event) => {
       this.setState({
-        open_modal: false
+        new_modal: false
       })
     };
 
-    const onCreateBoard = (data) => {
+    const handleNewBoard = (data) => {
       this.props.createBoard(data);
     };
-    
+
+    const handleCloneBoard = (data) => {
+      this.setState({
+        refresh: true
+      })
+      this.props.cloneBoard(data);
+    };
+
+    const handleViewBoard = (data) => {
+      this.props.history.push(data);
+    };
+
     return (
       <Grid
         spacing={0}
         container
         direction="row"
       >
-        {baords.map(function(item, index) {
-          return  <Grid item key={index} sm={3} xs={12} className={scss['board-container']}><BoardWidget classes={classes} data={item}/></Grid>
+        {boards.map(function(item, index) {
+          return <Grid item key={index} sm={3} xs={12} className={scss['board-container']}><BoardWidget classes={classes} data={item} onCloneEvent={handleCloneBoard} onViewEvent={handleViewBoard}/></Grid>
         })}
         <Grid item sm={3} xs={12} className={scss['board-container']}>
           <BoardAdd
             classes={classes}
-            handleEvent={onAddBoard}
+            onAddEvent={handleOpenNewBoardModal}
           />
         </Grid>
-        <BoardModal
+        <BoardNewModal
           classes={classes}
           data={data}
-          open={open_modal}
-          handleSubmit={onCreateBoard}
-          handleClose={onCloseModal}
+          open={new_modal}
+          onSumitEvent={handleNewBoard}
+          onCloseEvent={handleCloseModal}
         />
       </Grid>
     );
@@ -102,4 +129,4 @@ const mapStateToProps = (state) => ({
   res_data: state.res_data,
 });
 
-export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }), connect(mapStateToProps, { createBoard, getBoardList }))(BoardsList);
+export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }), connect(mapStateToProps, { createBoard, cloneBoard, getBoardList }))(BoardsList);

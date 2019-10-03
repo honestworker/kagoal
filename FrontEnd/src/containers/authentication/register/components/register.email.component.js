@@ -108,7 +108,7 @@ class RegisterEmail extends React.Component {
                 <Grid
                   container 
                   justify="center"
-                  alignitems="center"                  
+                  alignitems="center"
                   spacing={0}>
                   <Typography variant="h4" gutterBottom className={scss['robot-thin']}>
                     <span className={scss['robot-bold-label']}>New</span> Account

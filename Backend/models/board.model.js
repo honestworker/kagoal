@@ -15,10 +15,45 @@ const BoardSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Team',
   },
-  templates: [
+  template: {
+    type: Schema.Types.ObjectId,
+    ref: 'Template',
+  },
+  columns: [
     {
-      type: Schema.Types.ObjectId,
-      ref: 'Template',
+      name: {
+        type: String,
+        required: true
+      },
+      color: {
+        type: String,
+        required: true,
+        default: '#ffffff'
+      },
+      order: {
+        type: Number,
+        required: true
+      },
+      items: [
+        {
+          content: {
+            type: String,
+            required: true
+          },
+          votes: {
+            type: Number,
+            default: 0
+          },
+          comments: [
+            {
+              comment: {
+                type: String,
+                required: true
+              }
+            }
+          ]
+        }
+      ]
     }
   ],
   hide_cards: {
@@ -48,5 +83,4 @@ const BoardSchema = new Schema({
 });
 
 const Board = mongoose.model('boards', BoardSchema);
-
 module.exports = Board;

@@ -15,7 +15,8 @@ const TemplateSchema = new Schema({
       },
       color: {
         type: String,
-        required: '#ffffff'
+        required: true,
+        default: '#ffffff'
       },
     }
   ],
@@ -30,5 +31,7 @@ const TemplateSchema = new Schema({
 });
 
 const Template = mongoose.model('templates', TemplateSchema);
-
 module.exports = Template;
+
+const TemplateSM = mongoose.model('Template', TemplateSchema);
+module.exports = TemplateSM;

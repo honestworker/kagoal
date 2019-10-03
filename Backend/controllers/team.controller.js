@@ -25,12 +25,7 @@ exports.createTeamWidhName = (name) => {
 exports.getTeamsByUser = (id, res) => {
   Team.findOne({user: id, path: ''})
     .populate('user', 'full_name')
-    .exec(function(err1, team) {
-      if (err1) {
-        res.status(500).send({
-          message: err1.message
-        });
-      } else {
+    .then(team => {
         const teams_data = [];
         if (team) {
           teams_data.push({
@@ -45,12 +40,7 @@ exports.getTeamsByUser = (id, res) => {
           const reg_path = "^\/" + team.id;
           Team.find({path: {'$regex': reg_path}})
             .populate('user', 'full_name')
-            .exec(function(err2, teams) {
-              if (err2) {
-                res.status(500).send({
-                  message: err1.message
-                });
-              } else {
+            .then(teams => {
                 const loop_teams = teams;
                 teams.map((loop_team, indx) => {
                   const parent_path = loop_team.path.substring(0, loop_team.path.lastIndexOf('/'));
@@ -73,12 +63,18 @@ exports.getTeamsByUser = (id, res) => {
                   });
                 });
                 res.send(teams_data);
-              }
-          });
+            }).catch(err => {
+              res.status(500).send({
+                message: err.message
+              });
+            });
         } else {
           res.send(teams_data);
         }
-      }
+      }).catch(err => {
+      res.status(500).send({
+        message: err.message
+      });
     });
 }
 
@@ -227,107 +223,98 @@ exports.deleteTeam = (id, res) => {
 exports.getTeamsAsTree = (user_id, res) => {
   Team.findOne({"user": user_id})
     .populate('user', 'full_name')
-    .exec(function(err1, team) {
-      if (err1) {
-        res.status(500).send({
-          message: err1.message
+    .then(team => {
+      const teams_data = [];
+      if (team) {
+        teams_data.push({
+          id: team._id,
+          parentId: null,
+          name: team.name,
+          board: team.board,
+          description: team.description,
+          created_at: team.created_at,
+          user: team.user.full_name,
+          path: team.path,
         });
-      } else {
-        const teams_data = [];
-        if (team) {
-          teams_data.push({
-            id: team._id,
-            parentId: null,
-            name: team.name,
-            board: team.board,
-            description: team.description,
-            created_at: team.created_at,
-            user: team.user.full_name,
-            path: team.path,
-          });
-          const reg_path = "^\/" + team.id;
-          Team.find({path: {'$regex': reg_path}})
-            .populate('user', 'full_name')
-            .exec(function(err2, teams) {
-              if (err2) {
-                res.status(500).send({
-                  message: err1.message
-                });
-              } else {
-                const loop_teams = teams;
-                teams.map((loop_team, indx) => {
-                  const parent_path = loop_team.path.substring(0, loop_team.path.lastIndexOf('/'));
-                  let parent_id = team._id;
-                  if (parent_path) {
-                    for (var team_indx = 0; team_indx < loop_teams.length; team_indx++) {
-                      if (loop_teams[team_indx].path + "/" + loop_teams[team_indx]._id === loop_team.path) {
-                        parent_id = loop_teams[team_indx]._id;
-                      }
-                    }
+        const reg_path = "^\/" + team.id;
+        Team.find({path: {'$regex': reg_path}})
+          .populate('user', 'full_name')
+          .then(teams => {
+            const loop_teams = teams;
+            teams.map((loop_team, indx) => {
+              const parent_path = loop_team.path.substring(0, loop_team.path.lastIndexOf('/'));
+              let parent_id = team._id;
+              if (parent_path) {
+                for (var team_indx = 0; team_indx < loop_teams.length; team_indx++) {
+                  if (loop_teams[team_indx].path + "/" + loop_teams[team_indx]._id === loop_team.path) {
+                    parent_id = loop_teams[team_indx]._id;
                   }
-                  teams_data.push({
-                    id: loop_team._id,
-                    parentId: parent_id,
-                    name: loop_team.name,
-                    board: loop_team.board,
-                    description: loop_team.description,
-                    created_at: loop_team.created_at,
-                    user: team.user.full_name,
-                    path: loop_team.path,
-                  });
-                });
+                }
+              }
+              teams_data.push({
+                id: loop_team._id,
+                parentId: parent_id,
+                name: loop_team.name,
+                board: loop_team.board,
+                description: loop_team.description,
+                created_at: loop_team.created_at,
+                user: team.user.full_name,
+                path: loop_team.path,
+              });
+            });
 
-                teams_data.sort(function (a, b) {
-                  return a.path.length - b.path.length;
-                });
+            teams_data.sort(function (a, b) {
+              return a.path.length - b.path.length;
+            });
 
-                const teams_tree_data = [];
-                teams_data.map((team_data) => {
-                  let children = teams_tree_data;
-                  const paths = team_data.path.split("/");
-                  if (paths.length) {
-                    paths.forEach((loop_path) => {
-                      if (loop_path) {
-                        const chilrens = children;
-                        chilrens.forEach((loop_children) => {
-                          if (loop_children.id.toString() === loop_path) {
-                            children = loop_children.children;
-                          }
-                        });
+            const teams_tree_data = [];
+            teams_data.map((team_data) => {
+              let children = teams_tree_data;
+              const paths = team_data.path.split("/");
+              if (paths.length) {
+                paths.forEach((loop_path) => {
+                  if (loop_path) {
+                    const chilrens = children;
+                    chilrens.forEach((loop_children) => {
+                      if (loop_children.id.toString() === loop_path) {
+                        children = loop_children.children;
                       }
                     });
                   }
-                  children.push({
-                    id: team_data.id,
-                    parentId: team_data.parentId,
-                    name: team_data.name,
-                    board: team_data.board,
-                    description: team_data.description,
-                    created_at: team_data.created_at,
-                    user: team_data.full_name,
-                    children: []
-                  });
                 });
-
-                res.send(teams_tree_data);
               }
+              children.push({
+                id: team_data.id,
+                parentId: team_data.parentId,
+                name: team_data.name,
+                board: team_data.board,
+                description: team_data.description,
+                created_at: team_data.created_at,
+                user: team_data.full_name,
+                children: []
+              });
+            });
+
+            res.send(teams_tree_data);
+        }).catch(err => {
+          res.status(500).send({
+            message: err.message
           });
-        } else {
-          res.send(teams_data);
-        }
+        });
+      } else {
+        res.send(teams_data);
       }
+    }).catch(err => {
+      res.status(500).send({
+        message: err.message
+      });
     });
 }
 
 exports.getTeamsAsTreeById = (id, res) => {
   Team.findOne({"_id": id})
     .populate('user', 'full_name')
-    .exec(function(err1, team) {
-      if (err1) {
-        res.status(500).send({
-          message: err1.message
-        });
-      } else {
+    .then(team => {
         const teams_data = [];
         if (team) {
           teams_data.push({
@@ -343,12 +330,7 @@ exports.getTeamsAsTreeById = (id, res) => {
           const reg_path = "^\/" + team.id;
           Team.find({path: {'$regex': reg_path}})
             .populate('user', 'full_name')
-            .exec(function(err2, teams) {
-              if (err2) {
-                res.status(500).send({
-                  message: err1.message
-                });
-              } else {
+            .then(team => {
                 const loop_teams = teams;
                 teams.map((loop_team, indx) => {
                   const parent_path = loop_team.path.substring(0, loop_team.path.lastIndexOf('/'));
@@ -405,11 +387,17 @@ exports.getTeamsAsTreeById = (id, res) => {
                 });
 
                 res.send(teams_tree_data);
-              }
-          });
+            }).catch(err => {
+              res.status(500).send({
+                message: err.message
+              });
+            });
         } else {
           res.send(teams_data);
         }
-      }
+    }).catch(err => {
+      res.status(500).send({
+        message: err.message
+      });
     });
 }

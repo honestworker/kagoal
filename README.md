@@ -1,2 +1,2 @@
 # kagoal
-ReactJS  Django
+ReactJS  MonogDB NodeJs

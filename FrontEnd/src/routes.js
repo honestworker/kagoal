@@ -30,6 +30,7 @@ const AsyncTeamEdit = asyncComponent(() => import('./containers/pages/teams/team
 
 // BOARDS ROUTES
 const AsyncBoardsList = asyncComponent(() => import('./containers/pages/boards/boards.list.component'));
+const AsyncBoardEdit = asyncComponent(() => import('./containers/pages/boards/boards.edit.component'));
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
   <Route
@@ -101,6 +102,7 @@ export default ({ childProps, layout }) => {
       <AppRoute path="/team/create" exact component={AsyncTeamCreate} props={childProps} layout={activeLayout} />
       <AppRoute path="/team/:id" exact component={AsyncTeamEdit} props={childProps} layout={activeLayout} />
       <AppRoute path="/boards" exact component={AsyncBoardsList} props={childProps} layout={activeLayout} />
+      <AppRoute path="/boards/:tid/:bid" exact component={AsyncBoardEdit} props={childProps} layout={activeLayout} />
       <AppRoute path="/errors/404" exact component={AsyncError404} props={childProps} layout={NoLayout} />
       <AppRoute path="/errors/500" exact component={AsyncError500} props={childProps} layout={NoLayout} />
       <AppRoute component={AsyncNotFound} layout={activeLayout} />

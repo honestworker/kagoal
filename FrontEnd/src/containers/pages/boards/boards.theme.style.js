@@ -30,6 +30,17 @@ const styles = theme => ({
       'box-shadow': '2px 3px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12)',
     },
   },
+  'board-action': {
+    'text-align': 'center',
+    'color': theme.palette.primary.light,
+    '&:hover': {
+      'background': theme.palette.grey[200],
+    },
+  },
+  'small-icon-button': {
+    'font-size': '0.75rem',
+    'color': theme.palette.primary.light,
+  },
 });
 
 export default styles;

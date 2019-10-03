@@ -79,10 +79,6 @@
   min-height: 16px;
 }
 
-.small-icon-button {
-  font-size: 0.75rem;
-}
-
 .small-text {
   display: inline-block;
   padding-left: 0.5rem;
@@ -93,14 +89,214 @@
   border-top: 1px solid #f1f1f1;
 }
 
-.board-action {
-  text-align: center;
-}
-
-.board-action:hover {  
-  background: #f3f3f3;
-}
-
 .clipboard-text {
   display: none;
+}
+
+.board-title {
+  padding: 20px 30px 0px;
+}
+
+.board-setting-button {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  min-height: 21px;
+  width: 21px;
+  height: 21px;
+  right: 30px;
+  float: right;
+  top: 10px;
+  position: absolute;
+}
+
+/* Board Column */
+.board-column-panel {
+  margin-bottom: 10px;
+}
+
+.board-column-header {
+  margin-bottom: 10px;
+}
+
+.board-column-color {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  vertical-align: top;
+  border-radius: 3px;
+  margin-top: 3px;
+  margin-right: 3px;
+}
+
+.board-column-add {
+  background: #ddd;
+  border: 0;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.board-column-add:hover {
+  color: #555;
+  background: #ccc;
+}
+
+.small-trans-button {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  min-height: 21px;
+  width: 21px;
+  height: 21px;
+}
+
+.small-trans-icon {
+  font-size: 1rem;
+}
+
+/* Board Item */
+.board-item-panel {
+  padding-bottom: 4px;
+  color: white;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.board-item-panel {
+  padding-bottom: 4px;
+  color: white;
+  padding: 5px,
+}
+
+.board-item-title {
+  border: none;
+  resize: none;
+}
+
+.board-item-actions {
+  padding: 5px;
+  background: #fff;
+}
+
+.item-control-button {
+  font-size: 0.65rem;
+  line-height: 0.75rem;
+  max-width: 100px;
+  width: 40px;
+  min-width: 40px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.small-trans-right-button {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  min-height: 21px;
+  width: 21px;
+  height: 21px;
+  right: 0px;
+  float: right;
+  position: absolute;
+}
+
+.small-trans-right-wapper {
+  right: 0px;
+  float: right;
+  position: absolute;
+}
+
+.board-item-status {
+  padding: 5px;
+}
+
+.board-small-input input {
+  font-size: 14px;
+  padding: 7px;
+  color: white;
+  background: rgba(0, 0, 0, 0.67);
+}
+.small-trans-right-red-button {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  min-height: 21px;
+  width: 21px;
+  height: 21px;
+  right: 0px;
+  float: right;
+  position: absolute;
+  color: red;
+}
+
+/* Board Siderbar */
+.board-siderbar-panel {
+  width: 300px;
+  padding: 10px;
+}
+
+.board-siderbar-action {
+  height: 30px;
+}
+
+.board-siderbar-checks {
+  padding: 10px 30px;
+  border: 1px solid #333;
+  margin-bottom: 10px;
+}
+
+.board-direction-row {
+  flex-direction: row;
+}
+
+.small-trans-button-tm {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  min-height: 21px;
+  width: 21px;
+  height: 21px;
+  margin-top: 2px;
+  margin-left: 5px;
+}
+
+.small-trans-func-button {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  min-height: 21px;
+  width: 21px;
+  height: 21px;
+  margin-top: 2px;
+  margin-left: 5px;
+  margin-bottom: 15px;
+  margin-right: 10px;
+}
+
+.board-button-action {
+  flex-direction: row;
+  cursor: pointer;
+}
+
+.small-trans-right-button-rm {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  min-height: 21px;
+  width: 21px;
+  height: 21px;
+  right: 10px;
+  float: right;
+  position: absolute;
+}
+
+.board-title-button {
+  font-size: 0.65rem;
+  line-height: 0.75rem;
+  min-width: 40px;
+  cursor: pointer;
+  color: #fff;
+  margin: 6px 2px;
 }

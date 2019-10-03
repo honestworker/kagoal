@@ -17,7 +17,7 @@ class BoardAdd extends React.Component {
     const { classes } = this.props;
 
     const handleClick = (event) => {
-      this.props.handleEvent();
+      this.props.onAddEvent();
     };
 
     return (
@@ -45,7 +45,7 @@ class BoardAdd extends React.Component {
 
 BoardAdd.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  handleEvent: PropTypes.func.isRequired,
+  onAddEvent: PropTypes.func.isRequired,
 };
 
 export default BoardAdd;
